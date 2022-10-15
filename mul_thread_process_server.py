@@ -5,6 +5,8 @@ from socket import *
 from threading import Thread
 
 from fib import fib
+from concurrent.futures import ProcessPoolExecutor as Pool
+pool = Pool(3)
 
 
 class Handler:
@@ -15,7 +17,8 @@ class Handler:
             if not req:
                 break
             n = int(req)
-            result = fib(n)
+            future = pool.submit(fib, n)
+            result = future.result()
             resp = str(result).encode('ascii') + b'\n'
             client.send(resp)
         print("Closed")

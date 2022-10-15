@@ -27,7 +27,7 @@ class Server:
         sock = socket(AF_INET, SOCK_STREAM)
         sock.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
         sock.bind(address)
-        sock.listen(1)
+        sock.listen(5)
         while True:
             client, addr = sock.accept()
             print("Connection", addr)
@@ -36,4 +36,4 @@ class Server:
 
 if __name__ == '__main__':
     fib_server = Server()
-    fib_server.start(('', 25000))
+    fib_server.start(('', 26000))

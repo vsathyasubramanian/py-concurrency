@@ -20,7 +20,7 @@ class Handler:
         print("Closed")
 
 
-num_workers = 3
+num_workers = 2
 
 
 class WorkerProcess:
@@ -46,9 +46,10 @@ class MasterServer:
         sock.listen(5)
         w_process = [Process(target=self.worker_process.start, args=(sock,)) for i in
                      range(num_workers)]
-        for p in w_process:
-            p.daemon = True
-            p.start()
+        for _p in w_process:
+            # _p = w_process.pop()
+            _p.daemon = True
+            _p.start()
         while True:
             print("Master Process is UP!")
             time.sleep(10)
@@ -56,4 +57,4 @@ class MasterServer:
 
 if __name__ == '__main__':
     fib_server = MasterServer()
-    fib_server.start(('', 25000))
+    fib_server.start(('', 26000))
