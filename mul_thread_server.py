@@ -1,5 +1,7 @@
 # coding=utf-8
-
+"""
+Multi threaded server
+"""
 
 from socket import *
 from threading import Thread
@@ -8,6 +10,9 @@ from fib import fib
 
 
 class Handler:
+    """
+    Handler method which manages the service layer
+    """
     @staticmethod
     def fib_handler(client):
         while True:
@@ -22,6 +27,9 @@ class Handler:
 
 
 class ThreadServer:
+    """
+    Main Server class which runs multiple threads to manage connections and serve requests.
+    """
     def __init__(self):
         self.handler_obj = Handler()
 

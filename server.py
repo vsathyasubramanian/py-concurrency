@@ -1,5 +1,7 @@
 # coding=utf-8
-
+"""
+Single threaded server
+"""
 from socket import *
 
 from fib import fib

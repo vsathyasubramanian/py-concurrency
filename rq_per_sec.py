@@ -1,5 +1,7 @@
 # coding=utf-8
-
+"""
+Script to load the server with short requests. 1st fibonacci number.
+"""
 from socket import *
 import time
 

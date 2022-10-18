@@ -1,5 +1,7 @@
 # coding=utf-8
-
+"""
+Hybrid server which uses threads to manage connections and processes to offload compute intensive workloads (Service layer)
+"""
 
 from socket import *
 from threading import Thread
@@ -10,6 +12,9 @@ pool = Pool(3)
 
 
 class Handler:
+    """
+    handler method which manages the service layer
+    """
     @staticmethod
     def fib_handler(client):
         while True:
@@ -25,6 +30,9 @@ class Handler:
 
 
 class ThreadServer:
+    """
+    Main Server class which runs multiple threads to manage connections and serve requests.
+    """
     def __init__(self):
         self.handler_obj = Handler()
 

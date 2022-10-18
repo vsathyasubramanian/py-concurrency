@@ -1,4 +1,7 @@
 # coding=utf-8
+"""
+Cooperative multitasking server
+"""
 from collections import deque
 from select import select
 from socket import *
@@ -14,6 +17,11 @@ compute_wait = {}
 
 
 def run():
+    """
+    Custom event loop method
+    :return:
+    :rtype:
+    """
     while any([active_tasks, recv_wait, send_wait]):
         while active_tasks:
             _task = active_tasks.popleft()
@@ -22,7 +30,7 @@ def run():
                 # IO calls socket waits
                 if action in ("accept", "recv"):
                     recv_wait[obj] = _task
-                elif action in ("send"):
+                elif action == "send":
                     send_wait[obj] = _task
                 # Custom logic to handle compute tasks
                 elif action == 'compute':
@@ -46,6 +54,9 @@ def run():
 
 
 class Handler:
+    """
+    handler method which manages the service layer
+    """
     @staticmethod
     def fib_handler(client):
         while True:
@@ -63,6 +74,9 @@ class Handler:
 
 
 class YieldServer:
+    """
+    Main server which uses async yield to manage multiple connections and service layer.
+    """
     def __init__(self):
         self.handler_obj = Handler()
 

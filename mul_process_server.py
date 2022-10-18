@@ -1,4 +1,7 @@
 # coding=utf-8
+"""
+Multi process server
+"""
 import time
 from multiprocessing import Process
 from socket import *
@@ -7,6 +10,9 @@ from fib import fib
 
 
 class Handler:
+    """
+    handler method which manages the service layer
+    """
     @staticmethod
     def fib_handler(client):
         while True:
@@ -24,6 +30,9 @@ num_workers = 2
 
 
 class WorkerProcess:
+    """
+    Worker Process which starts the slave worker and initialises the service layer
+    """
     def __init__(self):
         self.handler_obj = Handler()
 
@@ -35,6 +44,9 @@ class WorkerProcess:
 
 
 class MasterServer:
+    """
+    Master Server class (Master Process) which spins number of worker pool to manage connections and process request
+    """
     def __init__(self):
         self.handler_obj = Handler()
         self.worker_process = WorkerProcess()
